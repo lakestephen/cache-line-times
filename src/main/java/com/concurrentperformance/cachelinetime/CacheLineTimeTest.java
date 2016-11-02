@@ -14,7 +14,7 @@ public class CacheLineTimeTest {
 
     public static void main(String[] args) {
 
-        final int[] largeArray = new int[64 * 1024 * 1024 * 2] ;
+        final byte[] largeArray = new byte[64 * 1024 * 1024 * 8] ;
 
         log.info("warm up");
         for (int i=0;i<20;i++) {
@@ -35,11 +35,11 @@ public class CacheLineTimeTest {
         iterate(largeArray, 1024);
     }
 
-    private static void iterate(int[] largeArray, int increment) {
+    private static void iterate(byte[] largeArray, int increment) {
         long startNs = System.nanoTime();
 
         for (int i = 0; i < largeArray.length; i += increment) {
-            largeArray[i] = i;
+            largeArray[i] = (byte)i;
         }
 
         long durationUs = (System.nanoTime() - startNs)/1000;
